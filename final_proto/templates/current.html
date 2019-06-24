@@ -1,0 +1,106 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HOME PAGE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <script type="text/javascript">
+        window.onload = function () {
+          var chart = new CanvasJS.Chart("chartContainer",
+          {
+      
+            title:{
+            text: "Power usage of {sector}"
+            },
+             data: [
+            {
+              type: "line",
+      
+              dataPoints: [
+              { x: new Date(2012, 00, 1), y: 450 },
+              { x: new Date(2012, 01, 1), y: 414 },
+              { x: new Date(2012, 02, 1), y: 520 },
+              { x: new Date(2012, 03, 1), y: 460 },
+              { x: new Date(2012, 04, 1), y: 450 },
+              { x: new Date(2012, 05, 1), y: 500 },
+              { x: new Date(2012, 06, 1), y: 480 },
+              { x: new Date(2012, 07, 1), y: 480 },
+              { x: new Date(2012, 08, 1), y: 410 },
+              { x: new Date(2012, 09, 1), y: 500 },
+              { x: new Date(2012, 10, 1), y: 480 },
+              { x: new Date(2012, 11, 1), y: 510 }
+              ]
+            }
+            ]
+          });
+      
+          chart.render();
+        }
+        </script>
+       <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+
+<body>
+    <section class="hero is-primary is-fullheight">
+
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                            <a href="{{ url_for('main.index') }}" class="navbar-item">
+                                Home
+                            </a>
+                            <a href="{{ url_for('api.current') }}" class="navbar-item">
+                                Current Rate
+                            </a>
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                                Profile
+                            </a>
+                            <a href="{{ url_for('api.graph') }}" class="navbar-item">
+                                Graph
+                            </a>
+                            <a href="{{ url_for('api.bill') }}" class="navbar-item">
+                                Bill
+                            </a>
+                            {% endif %}
+                            {% if not current_user.is_authenticated %}
+                            <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                                Login
+                            </a>
+                            <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                                Sign Up
+                            </a>
+                            {% endif %}
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                                Logout
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <h1 class="title">Current </h1>
+                </div>
+                <div id="chartContainer" style="height: 300px; width: 100%;">
+                </div>
+            </div>
+        </div>
+       
+    </section>
+</body>
+
+</html>
