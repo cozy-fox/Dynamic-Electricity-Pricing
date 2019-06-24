@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template,jsonify
 from flask_login import login_required, current_user
 import mysql.connector
 
@@ -19,7 +19,7 @@ if(mysqltest):
 
 api = Blueprint('api', __name__)
 
-def extract(sector):
+def extract_time(sector):
     mycursor = mydb.cursor()
     c=0
     store=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -34,12 +34,15 @@ def extract(sector):
                 for x in myresult:
                     store[c]=store[c]+x[3]/100
                 c+=1
-    return store
-    
+    return store[:-1]
+
+@api.route('/current/<string:sector>/<int:json>')
 @api.route('/current/<string:sector>')
 @api.route('/current')
-def current(sector='AA'):
-    store=extract(sector)
+def current(sector='AA',json=0):
+    store=extract_time(sector)
+    if(json==1):
+        return jsonify(store)
     return render_template('current.html',store=store,sector=sector)
 
 @api.route('/graph')
