@@ -19,10 +19,28 @@ if(mysqltest):
 
 api = Blueprint('api', __name__)
 
-@api.route('/current')
-def current():
+def extract(sector):
+    mycursor = mydb.cursor()
+    c=0
+    store=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    for i in range(0,3):
+        for j in range (0,10):
+            check= str(i)+str(j)
+            if(check == '25'):
+                break
+            else:
+                mycursor.execute(f"SELECT * FROM base WHERE SECTOR= '{sector}' AND TIME={check};")
+                myresult = mycursor.fetchall()
+                for x in myresult:
+                    store[c]=store[c]+x[3]/100
+                c+=1
+    return store
     
-    return render_template('current.html')
+@api.route('/current/<string:sector>')
+@api.route('/current')
+def current(sector='AA'):
+    store=extract(sector)
+    return render_template('current.html',store=store,sector=sector)
 
 @api.route('/graph')
 @login_required
