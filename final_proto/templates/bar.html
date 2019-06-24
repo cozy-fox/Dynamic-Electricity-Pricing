@@ -10,28 +10,40 @@
     <title>Power</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
     <script type="text/javascript">
-        window.onload = function () {
-          var chart = new CanvasJS.Chart("chartContainer",
-          {
-      
-            title:{
-            text: "Power usage hourwise of sector {{sector}} from 17/03/2019 to 7/5/2019 in GWh"
-            },
-             data: [
-            {
-              type: "spline",
-      
-              dataPoints: [
-                    {%for i in range(0,24)%}
-                        { x: {{i}}, y: {{store[i]}} },
-                    {%endfor%}
-              ]
-            }
+            window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer",
+        {
+        title:{
+            text: "SECTOR WISE ANALYSIS OF AA AND AB IN MWh per day"
+        },
+        data: [
+        {
+            type: "bar",
+            dataPoints: [
+            { y: 198, label: 30},
+            { y: 201, label: 29},
+            { y: 202, label: 28},
+            { y: 236, label: 27},
+            { y: 395, label: 26},
+            { y: 957, label: 25}
             ]
-          });
-      
-          chart.render();
+        },
+        {
+            type: "bar",
+            dataPoints: [
+            { y: 185, label: 30},
+            { y: 128, label: 29},
+            { y: 246, label: 28},
+            { y: 272, label: 27},
+            { y: 296, label: 26},
+            { y: 666, label: 25}
+            ]
         }
+        ]
+        });
+
+    chart.render();
+    }
         </script>
        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
@@ -87,7 +99,7 @@
         <div class="hero-body">
             <div class="container has-text-centered">
                 <div class="column is-4 is-offset-4">
-                    <h1 class="title">POWER CONSUMPTION </h1>
+                    <h1 class="title">SECTOR WISE ANALYSIS</h1>
                 </div>
                 <div id="chartContainer" style="height: 300px; width: 100%;">
                 </div>

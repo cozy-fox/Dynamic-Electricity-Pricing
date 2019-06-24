@@ -26,6 +26,9 @@
                             <a href="{{ url_for('api.current') }}" class="navbar-item">
                                 Monthly Use Hour Wise
                             </a>
+                            <a href="{{ url_for('api.bar') }}" class="navbar-item">
+                                Sector Wise Analysis
+                            </a>
                             {% if current_user.is_authenticated %}
                             <a href="{{ url_for('main.profile') }}" class="navbar-item">
                                 Profile

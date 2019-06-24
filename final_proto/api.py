@@ -36,6 +36,23 @@ def extract_time(sector):
                 c+=1
     return store[:-1]
 
+def extract_day(sector):
+    mycursor = mydb.cursor()
+    c=0
+    store=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    for i in range(0,3):
+        for j in range (0,10):
+            check= str(i)+str(j)
+            if(check == '25'):
+                break
+            else:
+                mycursor.execute(f"SELECT * FROM base WHERE SECTOR= '{sector}' AND TIME={check};")
+                myresult = mycursor.fetchall()
+                for x in myresult:
+                    store[c]=store[c]+x[3]/100
+                c+=1
+    return store[:-1]
+
 @api.route('/current/<string:sector>/<int:json>')
 @api.route('/current/<string:sector>')
 @api.route('/current')
@@ -44,6 +61,12 @@ def current(sector='AA',json=0):
     if(json==1):
         return jsonify(store)
     return render_template('current.html',store=store,sector=sector)
+
+@api.route('/bar')
+def bar():
+    store=extract_day('AA')
+    store2=extract_day('AB')
+    return render_template('bar.html',store=store,store2=store2)
 
 @api.route('/graph')
 @login_required

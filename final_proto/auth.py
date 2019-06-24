@@ -5,22 +5,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required
 from .models import User
 from . import db
-import mysql.connector
-
-mysqltest=False
-mydb = mysql.connector.connect(
-	host='localhost',
-	user='root',
-	passwd='qwertyhigh',
-	database='ministry'
-)
-if(mysqltest):
-    mycursor = mydb.cursor()
-    mycursor.execute("SELECT * FROM base")
-    myresult = mycursor.fetchall()
-
-    for x in myresult:
-        print(x)
 
 auth = Blueprint('auth', __name__)
 
