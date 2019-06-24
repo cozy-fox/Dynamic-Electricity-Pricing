@@ -68,6 +68,10 @@ def bar():
     store2=extract_day('AB')
     return render_template('bar.html',store=store,store2=store2)
 
+@api.route('/rate')
+def rate():
+    return render_template('rate.html')
+
 @api.route('/graph')
 @login_required
 def graph():

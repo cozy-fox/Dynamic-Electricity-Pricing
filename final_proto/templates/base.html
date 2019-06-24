@@ -29,6 +29,9 @@
                             <a href="{{ url_for('api.bar') }}" class="navbar-item">
                                 Sector Wise Analysis
                             </a>
+                            <a href="{{ url_for('api.rate') }}" class="navbar-item">
+                                Future Rates
+                            </a>
                             {% if current_user.is_authenticated %}
                             <a href="{{ url_for('main.profile') }}" class="navbar-item">
                                 Profile
