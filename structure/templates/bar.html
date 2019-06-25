@@ -10,31 +10,37 @@
     <title>Power</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
     <script type="text/javascript">
-        window.onload = function () {
-          var chart = new CanvasJS.Chart("chartContainer",
-          {
-            theme: "dark2",
+            window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer",
+        {
+            theme: "dark1",
             animationEnabled: true,
-            title:{
-            text: "Power usage hourwise of sector {{sector}} from 17/03/2019 to 7/5/2019 in KWh",padding:5,margin:10
-            },
-            axisX:{title:"Hour of day",},
-            axisY:{title:"Total Power",},
-             data: [
-            {
-              type: "spline",
-      
-              dataPoints: [
+        title:{
+            text: "Hour Wise comparison of sector AA and AB"
+        },
+        axisX:{title:"HOUR",},
+        axisY:{title:"Average Power(KWhz)                 AA:Purple AB:Turqoise",},
+        data: [
+        {
+            type: "bar",
+            dataPoints: [
                     {%for i in range(0,24)%}
-                        { x: {{i}}, y: {{store[i]}} },
+                        { y: {{store[i]/50}}, label: {{i}} },
                     {%endfor%}
-              ]
-            }
             ]
-          });
-      
-          chart.render();
+        },
+        {
+            type: "bar",
+            dataPoints: [
+            {%for i in range(0,24)%}
+                        { y: {{store2[i]/50}}, label: {{i}} },
+                    {%endfor%}            ]
         }
+        ]
+        });
+
+    chart.render();
+    }
         </script>
        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
@@ -93,9 +99,9 @@
         <div class="hero-body">
             <div class="container has-text-centered">
                 <div class="column is-4 is-offset-4">
-                    <h1 class="title">POWER CONSUMPTION </h1>
+                    <h1 class="title">SECTOR WISE ANALYSIS</h1>
                 </div>
-                <div id="chartContainer" style="height: 500px; width: 100%;">
+                <div id="chartContainer" style="height: 600px; width: 100%;">
                 </div>
             </div>
         </div>

@@ -3,6 +3,22 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+import mysql.connector
+
+mysqltest=False
+mydb = mysql.connector.connect(
+	host='localhost',
+	user='root',
+	passwd='qwertyhigh',
+	database='ministry'
+)
+if(mysqltest):
+    mycursor = mydb.cursor()
+    mycursor.execute("SELECT * FROM base")
+    myresult = mycursor.fetchall()
+
+    for x in myresult:
+        print(x)
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
@@ -10,8 +26,7 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
 
-    app.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopO'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+    app.config.from_envvar('APP_SETTINGS')
 
     db.init_app(app)
 
