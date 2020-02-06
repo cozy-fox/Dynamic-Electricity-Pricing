@@ -1,4 +1,4 @@
-# Dyanmic Electricty Pricing
+# Dynamic Electricty Pricing
 
 This project was made for the Summer Internship, GAIP at National University of Singapore under NUS and Hewlett Packard Enterprise faculty. It presents an IoT solution where power consumption of varioud households and industries and is sent to a cloud service on an hourly basis. On basis of this data, a graph is plotted of various sectors and their hourly consumption. Machine Learning is used to predict the peak hours of consumption.
 The problem is that Power Supply grids in cities have a slow response time according to the demand and hence waste a lot of power duw to delayed response and uneven distribution. If the cost of electricty is dynamically regulated high during the peak hours and low during the other hours, people will be incentivised to shift work which is not urgent to the cheaper hours, saving a lot of economic resources.
